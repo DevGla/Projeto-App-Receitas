@@ -10,18 +10,22 @@ function Footer() {
     <Container className="fixed-bottom border" fluid data-testid="footer">
       <Row className="py-2">
         <Col className="d-flex justify-content-center">
-          <Link to="/drinks" data-testid="drinks-bottom-btn">
-            <img src={ drinkIcon } alt="drink's icon" />
+          <Link to="/drinks">
+            <img data-testid="drinks-bottom-btn" src={ drinkIcon } alt="drink's icon" />
           </Link>
         </Col>
         <Col className="d-flex justify-content-center">
-          <Link to="/explore" data-testid="explore-bottom-btn">
-            <img src={ exploreIcon } alt="explore's icon" />
+          <Link to="/explore">
+            <img
+              data-testid="explore-bottom-btn"
+              src={ exploreIcon }
+              alt="explore's icon"
+            />
           </Link>
         </Col>
         <Col className="d-flex justify-content-center">
-          <Link to="/foods" data-testid="food-bottom-btn">
-            <img src={ mealIcon } alt="food's icon" />
+          <Link to="/foods">
+            <img data-testid="food-bottom-btn" src={ mealIcon } alt="food's icon" />
           </Link>
         </Col>
       </Row>
