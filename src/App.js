@@ -9,7 +9,7 @@ function App() {
   return (
     <Switch>
       <Route exact path="/" component={ Login } />
-      {/* <Route exact path="/foods" component={ Foods } />
+      <Route exact path="/foods" component={ Foods } />
       <Route exact path="/foods/:id" component={ Food } />
       <Route exact path="/foods/:id/in-progress" component={ FoodInProgress } />
       <Route exact path="/drinks" component={ Drinks } />
@@ -40,7 +40,7 @@ function App() {
       />
       <Route exact path="/profile" component={ Profile } />
       <Route exact path="/done-recipes" component={ DoneRecipes } />
-      <Route exact path="/favorite-recipes" component={ FavoriteRecipes } /> */}
+      <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
     </Switch>
   );
 }
