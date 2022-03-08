@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import SearchBar from './SearchBar';
 
-function Header() {
+function Header({ type }) {
   const [visibleInput, setVisibleInput] = useState(false);
   const [visibleimage, setVisibleImage] = useState(true);
 
@@ -45,10 +47,14 @@ function Header() {
         </div>
       )}
       {visibleInput && (
-        <input type="text" data-testid="search-input" />
+        <SearchBar type={ type } />
       )}
     </div>
   );
 }
+
+Header.propTypes = {
+  type: PropTypes.string.isRequired,
+};
 
 export default Header;
