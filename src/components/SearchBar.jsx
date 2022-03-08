@@ -9,6 +9,23 @@ function SearchBar({ type }) {
   const { setResults } = useContext(RecipesContext);
   const history = useHistory();
 
+  const handleAlert = (obj) => {
+    switch (type) {
+    case 'meal':
+      if (obj.meals === null) {
+        global.alert('Sorry, we haven\'t found any recipes for these filters.');
+      }
+      break;
+    case 'cocktail':
+      if (obj.drinks === null) {
+        global.alert('Sorry, we haven\'t found any recipes for these filters.');
+      }
+      break;
+    default:
+      break;
+    }
+  };
+
   const handleSearch = async () => {
     try {
       let { data, result } = [];
@@ -34,6 +51,7 @@ function SearchBar({ type }) {
       default:
         break;
       }
+      handleAlert(result);
       if (type === 'meal' && result.meals.length === 1) {
         history.push(`/foods/${result.meals[0].idMeal}`);
       } else if (type === 'cocktail' && result.drinks.length === 1) {
