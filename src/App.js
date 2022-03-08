@@ -3,8 +3,8 @@ import './App.css';
 import { Switch, Route } from 'react-router-dom';
 // import rockGlass from './images/rockGlass.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Login from './pages/Login';
 import Foods from './pages/Foods';
+import Login from './pages/Login';
 import Food from './pages/Food';
 import FoodInProgress from './pages/FoodInProgress';
 import Drinks from './pages/Drinks';
@@ -29,6 +29,8 @@ function App() {
       <Route exact path="/foods/:id" component={ Food } />
       <Route exact path="/foods/:id/in-progress" component={ FoodInProgress } />
       <Route exact path="/drinks" component={ Drinks } />
+      <Route exact path="/foods/:id" component={ Food } />
+      <Route exact path="/foods/:id/in-progress" component={ FoodInProgress } />
       <Route exact path="/drinks/:id" component={ Drink } />
       <Route exact path="/drinks/:id/in-progress" component={ DrinkInProgress } />
       <Route exact path="/explore" component={ Explore } />
