@@ -3,16 +3,18 @@ import './App.css';
 import { Switch, Route } from 'react-router-dom';
 // import rockGlass from './images/rockGlass.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Foods from './pages/Foods';
 import Login from './pages/Login';
+import Drinks from './pages/Drinks';
 
 function App() {
   return (
     <Switch>
       <Route exact path="/" component={ Login } />
-      {/* <Route exact path="/foods" component={ Foods } />
-      <Route exact path="/foods/:id" component={ Food } />
-      <Route exact path="/foods/:id/in-progress" component={ FoodInProgress } />
+      <Route exact path="/foods" component={ Foods } />
       <Route exact path="/drinks" component={ Drinks } />
+      {/* <Route exact path="/foods/:id" component={ Food } />
+      <Route exact path="/foods/:id/in-progress" component={ FoodInProgress } />
       <Route exact path="/drinks/:id" component={ Drink } />
       <Route exact path="/drinks/:id/in-progress" component={ DrinkInProgress } />
       <Route exact path="/explore" component={ Explore } />
