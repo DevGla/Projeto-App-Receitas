@@ -12,7 +12,6 @@ function Drinks() {
     <div>
       <Header type="cocktail" />
       <h1 data-testid="page-title">Drinks</h1>
-      {/* <button type="button" data-testid="search-top-btn">Search</button> */}
       {results.drinks && results.drinks
         .map((e, index) => {
           if (index <= ELEVEN) {
