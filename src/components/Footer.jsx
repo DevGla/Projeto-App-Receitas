@@ -7,7 +7,7 @@ import mealIcon from '../images/mealIcon.svg';
 
 function Footer() {
   return (
-    <Container className="fixed-bottom border" fluid data-testid="footer">
+    <Container className="fixed-bottom border bg-light" fluid data-testid="footer">
       <Row className="py-2">
         <Col className="d-flex justify-content-center">
           <Link to="/drinks">

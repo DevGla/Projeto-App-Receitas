@@ -4,7 +4,7 @@ import RecipesCard from '../components/RecipesCard';
 import RecipesContext from '../context/RecipesContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { fetchRecipe, fetchRecipeCategories } from '../services';
+import { fetchFilterByCategories, fetchRecipe, fetchRecipeCategories } from '../services';
 
 function Foods() {
   const { results, setResults } = useContext(RecipesContext);
@@ -25,6 +25,12 @@ function Foods() {
     fetchRecipe('meal')
       .then((recipes) => setResults(recipes));
   }, [setResults]);
+
+  const filterByCategory = (category) => {
+    fetchFilterByCategories('meal', category)
+      .then((recipes) => setResults(recipes))
+      .catch((error) => console.log(error));
+  };
 
   function onlyTwelveRecipes(meal, index) {
     if (index <= ELEVEN) {
@@ -51,6 +57,7 @@ function Foods() {
               data-testid={ `${category.strCategory}-category-filter` }
               className="w-100"
               variant="outline-primary"
+              onClick={ () => filterByCategory(category.strCategory) }
             >
               {category.strCategory }
             </Button>

@@ -27,6 +27,9 @@ export const fetchRecipeCategories = (type) => (
     .then((categories) => categories)
 );
 
-export const c = () => (
-  null
+export const fetchFilterByCategories = (type, category) => (
+  fetch(`https://www.the${type}db.com/api/json/v1/1/filter.php?c=${category}`)
+    .then((response) => response.json())
+    .then((categories) => categories)
+    .catch((error) => error)
 );
