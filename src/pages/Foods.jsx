@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Button, Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import RecipesCard from '../components/RecipesCard';
 import RecipesContext from '../context/RecipesContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { fetchFilterByCategories, fetchRecipe, fetchRecipeCategories } from '../services';
+import ButtonCategory from '../components/ButtonCategory';
 
 function Foods() {
   const { results, setResults } = useContext(RecipesContext);
@@ -27,20 +29,26 @@ function Foods() {
   }, [setResults]);
 
   const filterByCategory = (category) => {
-    fetchFilterByCategories('meal', category)
-      .then((recipes) => setResults(recipes))
-      .catch((error) => console.log(error));
+    if (category === 'All') {
+      fetchRecipe('meal')
+        .then((recipes) => setResults(recipes));
+    } else {
+      fetchFilterByCategories('meal', category)
+        .then((recipes) => setResults(recipes))
+        .catch((error) => console.log(error));
+    }
   };
 
   function onlyTwelveRecipes(meal, index) {
     if (index <= ELEVEN) {
       return (
-        <RecipesCard
-          key={ meal.idMeal }
-          recipe={ meal }
-          index={ index }
-          type="Meal"
-        />
+        <Link key={ meal.idMeal } to={ `/foods/${meal.idMeal}` }>
+          <RecipesCard
+            recipe={ meal }
+            index={ index }
+            type="Meal"
+          />
+        </Link>
       );
     }
     return null;
@@ -53,14 +61,10 @@ function Foods() {
       <Row>
         {categories.length > 0 && categories.map((category) => (
           <Col xs="4" as="section" key={ category.strCategory }>
-            <Button
-              data-testid={ `${category.strCategory}-category-filter` }
-              className="w-100"
-              variant="outline-primary"
-              onClick={ () => filterByCategory(category.strCategory) }
-            >
-              {category.strCategory }
-            </Button>
+            <ButtonCategory
+              category={ category.strCategory }
+              filterBy={ filterByCategory }
+            />
           </Col>
         ))}
       </Row>

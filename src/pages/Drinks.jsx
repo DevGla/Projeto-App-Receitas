@@ -1,10 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Button, Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import RecipesCard from '../components/RecipesCard';
 import RecipesContext from '../context/RecipesContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { fetchRecipe, fetchRecipeCategories, fetchFilterByCategories } from '../services';
+import ButtonCategory from '../components/ButtonCategory';
 
 function Drinks() {
   const { results, setResults } = useContext(RecipesContext);
@@ -28,19 +30,28 @@ function Drinks() {
   }, [setResults]);
 
   const filterByCategory = (category) => {
-    fetchFilterByCategories('cocktail', category)
-      .then((recipes) => setResults(recipes))
-      .catch((error) => console.log(error));
+    if (category === 'All') {
+      fetchRecipe('cocktail')
+        .then((recipes) => setResults(recipes));
+    } else {
+      fetchFilterByCategories('cocktail', category)
+        .then((recipes) => setResults(recipes))
+        .catch((error) => console.log(error));
+    }
   };
 
   function onlyTwelveRecipes(cocktail, index) {
     if (index <= ELEVEN) {
-      return (<RecipesCard
-        key={ cocktail.idDrink }
-        recipe={ cocktail }
-        index={ index }
-        type="Drink"
-      />);
+      return (
+        <Link key={ cocktail.idDrink } to={ `/drinks/${cocktail.idDrink}` }>
+          <RecipesCard
+            key={ cocktail.idDrink }
+            recipe={ cocktail }
+            index={ index }
+            type="Drink"
+          />
+        </Link>
+      );
     }
     return null;
   }
@@ -52,14 +63,10 @@ function Drinks() {
       <Row>
         {categories.length > 0 && categories.map((category) => (
           <Col xs="4" as="section" key={ category.strCategory }>
-            <Button
-              data-testid={ `${category.strCategory}-category-filter` }
-              className="w-100 h-100 text-break text-wrap"
-              variant="outline-primary"
-              onClick={ () => filterByCategory(category.strCategory) }
-            >
-              {category.strCategory }
-            </Button>
+            <ButtonCategory
+              category={ category.strCategory }
+              filterBy={ filterByCategory }
+            />
           </Col>
         ))}
       </Row>
