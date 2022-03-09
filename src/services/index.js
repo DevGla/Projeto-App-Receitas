@@ -21,8 +21,10 @@ export const fetchRecipe = (type) => (
     .then((recipes) => recipes)
 );
 
-export const b = () => (
-  null
+export const fetchRecipeCategories = (type) => (
+  fetch(`https://www.the${type}db.com/api/json/v1/1/list.php?c=list`)
+    .then((response) => response.json())
+    .then((categories) => categories)
 );
 
 export const c = () => (
