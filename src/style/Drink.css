@@ -1,0 +1,13 @@
+.all-rec {
+  display: flex;
+  overflow: auto;
+}
+
+.rec img {
+  width: 50vw;
+}
+
+.startBtn {
+  bottom: 0px;
+  position: fixed;
+}
