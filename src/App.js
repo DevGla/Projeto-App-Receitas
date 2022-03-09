@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import { Switch, Route } from 'react-router-dom';
-// import rockGlass from './images/rockGlass.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Foods from './pages/Foods';
 import Login from './pages/Login';
