@@ -19,7 +19,7 @@ function ButtonCategory({ category, filterBy }) {
       variant="outline-primary"
       onClick={ handleActive }
     >
-      {category.strCategory}
+      {category}
     </Button>
   );
 }
