@@ -33,3 +33,43 @@ export const fetchFilterByCategories = (type, category) => (
     .then((categories) => categories)
     .catch((error) => error)
 );
+
+export const fetchingId = async (string, func) => {
+  try {
+    const data = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${string}`);
+    const result = await data.json();
+    func(result.meals[0]);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const fetchingDrinkId = async (string, func) => {
+  try {
+    const data = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${string}`);
+    const result = await data.json();
+    func(result.drinks[0]);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const fetchingRecomendation = async (func) => {
+  try {
+    const data = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+    const result = await data.json();
+    func(result.drinks);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const fetchingDrinkRecomendation = async (func) => {
+  try {
+    const data = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+    const result = await data.json();
+    func(result.meals);
+  } catch (error) {
+    console.error(error);
+  }
+};
