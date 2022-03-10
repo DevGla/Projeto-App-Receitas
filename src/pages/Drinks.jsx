@@ -5,11 +5,13 @@ import RecipesCard from '../components/RecipesCard';
 import RecipesContext from '../context/RecipesContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { fetchRecipe, fetchRecipeCategories, fetchFilterByCategories } from '../services';
+import { fetchRecipe, fetchRecipeCategories,
+  fetchFilterByCategories, fetchRecipeByIngredient,
+} from '../services';
 import ButtonCategory from '../components/ButtonCategory';
 
 function Drinks() {
-  const { results, setResults } = useContext(RecipesContext);
+  const { results, setResults, filterByIngredient } = useContext(RecipesContext);
   const [categories, setCategories] = useState([]);
   const ELEVEN = 11;
 
@@ -25,9 +27,17 @@ function Drinks() {
   }, []);
 
   useEffect(() => {
-    fetchRecipe('cocktail')
-      .then((recipes) => setResults(recipes));
-  }, [setResults]);
+    if (filterByIngredient.length !== 0) {
+      fetchRecipeByIngredient('cocktail', filterByIngredient)
+        .then((recipes) => {
+          setResults(recipes);
+        })
+        .catch((error) => console.log(error));
+    } else {
+      fetchRecipe('cocktail')
+        .then((recipes) => setResults(recipes));
+    }
+  }, [setResults, filterByIngredient]);
 
   const filterByCategory = (category) => {
     if (category === 'All') {
@@ -58,8 +68,7 @@ function Drinks() {
 
   return (
     <Container>
-      <Header type="cocktail" />
-      <h1 data-testid="page-title">Drinks</h1>
+      <Header type="cocktail" title="Drinks" />
       <Row>
         {categories.length > 0 && categories.map((category) => (
           <Col xs="4" as="section" key={ category.strCategory }>

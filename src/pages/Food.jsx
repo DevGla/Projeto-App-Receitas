@@ -5,7 +5,9 @@ import copy from 'clipboard-copy';
 import IngredientsList from '../components/IngredientsList';
 import RecomendationCard from '../components/RecomendationCard';
 import shareIcon from '../images/shareIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import { fetchingId, fetchingRecomendation } from '../services';
 
 function Food() {
   const { id } = useParams();
@@ -14,28 +16,9 @@ function Food() {
   const [recomendation, setRecomendation] = useState([]);
   const [done, setDone] = useState(false);
   const [inProgress, setInProgres] = useState(false);
+  const [favorite, setFavorite] = useState(false);
   const [copied, setCopied] = useState(false);
   const FIVE = 5;
-
-  const fetchingId = async (string) => {
-    try {
-      const data = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${string}`);
-      const result = await data.json();
-      setRecipe(result.meals[0]);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const fetchingRecomendation = async () => {
-    try {
-      const data = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
-      const result = await data.json();
-      setRecomendation(result.drinks);
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   const checkDone = () => {
     const local = JSON.parse(localStorage.getItem('doneRecipes'));
@@ -53,6 +36,14 @@ function Food() {
     }
   };
 
+  const checkFavorite = () => {
+    const local = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (local) {
+      const check = local.some((e) => e.id === id);
+      setFavorite(check);
+    }
+  };
+
   const handleClick = () => {
     history.push(`/foods/${id}/in-progress`);
   };
@@ -62,11 +53,28 @@ function Food() {
     setCopied(true);
   };
 
+  const handleFavorite = () => {
+    setFavorite(!favorite);
+    const local = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const obj = {
+      id: recipe.idMeal,
+      type: 'food',
+      nationality: recipe.strArea,
+      category: recipe.strCategory,
+      alcoholicOrNot: '',
+      name: recipe.strMeal,
+      image: recipe.strMealThumb,
+    };
+    if (local) localStorage.setItem('favoriteRecipes', JSON.stringify([...local, obj]));
+    localStorage.setItem('favoriteRecipes', JSON.stringify([obj]));
+  };
+
   useEffect(() => {
-    fetchingId(id);
-    fetchingRecomendation();
+    fetchingId(id, setRecipe);
+    fetchingRecomendation(setRecomendation);
     checkDone();
     checkInProgress();
+    checkFavorite();
   }, []);
 
   return (
@@ -77,8 +85,12 @@ function Food() {
         <img src={ shareIcon } alt="" data-testid="share-btn" />
       </div>
       {copied && (<span>Link copied!</span>)}
-      <div role="button">
-        <img src={ whiteHeartIcon } alt="" data-testid="favorite-btn" />
+      <div role="button" tabIndex="0" onKeyDown={ () => {} } onClick={ handleFavorite }>
+        <img
+          src={ favorite ? blackHeartIcon : whiteHeartIcon }
+          alt=""
+          data-testid="favorite-btn"
+        />
       </div>
       <p data-testid="recipe-category">{ recipe.strCategory }</p>
       <IngredientsList recipe={ recipe } />
