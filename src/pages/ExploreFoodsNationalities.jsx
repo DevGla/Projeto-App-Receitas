@@ -5,8 +5,7 @@ import Footer from '../components/Footer';
 function ExploreFoodsNationalities() {
   return (
     <>
-      <h1 data-testid="page-title">Explore Nationalities</h1>
-      <Header />
+      <Header title="Explore Nationalities" />
       <Footer />
     </>
   );

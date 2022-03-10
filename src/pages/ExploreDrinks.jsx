@@ -14,8 +14,7 @@ function ExploreDrinks() {
 
   return (
     <div>
-      <Header />
-      <h1 data-testid="page-title">Explore Drinks</h1>
+      <Header title="Explore Drinks" />
       <Link
         to="/explore/drinks/ingredients"
         data-testid="explore-by-ingredient"

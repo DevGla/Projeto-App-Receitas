@@ -12,8 +12,7 @@ function Profile() {
 
   return (
     <div>
-      <Header />
-      <h1 data-testid="page-title">Profile</h1>
+      <Header title="Profile" />
       <p data-testid="profile-email">{stateEmail}</p>
       <Link to="/done-recipes" data-testid="profile-done-btn">Done Recipes</Link>
       <Link
