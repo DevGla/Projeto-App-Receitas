@@ -1,20 +1,3 @@
-// const filterURL = (option) => {
-//   switch (option) {
-//   case 'ingredient':
-//     return 'ingredient';
-//   case 'name':
-//     return 'name';
-//   case 'first-letter':
-//     return 'first-letter';
-//   default:
-//     return null;
-//   }
-// };
-
-// const URL = (type, searchInput) => (
-//   `https://www.the${type}db.com/api/json/v1/1/filter.php?i=${searchInput}`
-// );
-
 export const fetchRecipe = (type) => (
   fetch(`https://www.the${type}db.com/api/json/v1/1/search.php?s=`)
     .then((response) => response.json())
@@ -73,3 +56,16 @@ export const fetchingDrinkRecomendation = async (func) => {
     console.error(error);
   }
 };
+export const fetchRecipeByIngredient = (type, ingredient) => (
+  fetch(`https://www.the${type}db.com/api/json/v1/1/filter.php?i=${ingredient}`)
+    .then((response) => response.json())
+    .then((recipes) => recipes)
+    .catch((error) => error)
+);
+
+export const fetchIngredients = (type) => (
+  fetch(`https://www.the${type}db.com/api/json/v1/1/list.php?i=list`)
+    .then((response) => response.json())
+    .then((ingredients) => ingredients)
+    .catch((error) => error)
+);

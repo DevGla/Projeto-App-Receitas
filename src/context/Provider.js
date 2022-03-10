@@ -5,12 +5,15 @@ import RecipesContext from './RecipesContext';
 function Provider({ children }) {
   const [results, setResults] = useState({});
   const [searched, setSearched] = useState(false);
+  const [filterByIngredient, setFilterByIngredient] = useState('');
 
   const context = {
     results,
     setResults,
     searched,
     setSearched,
+    filterByIngredient,
+    setFilterByIngredient,
   };
 
   return (

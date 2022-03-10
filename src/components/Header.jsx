@@ -5,7 +5,7 @@ import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
 
-function Header({ type }) {
+function Header({ type, title }) {
   const [visibleInput, setVisibleInput] = useState(false);
   const [visibleimage, setVisibleImage] = useState(true);
 
@@ -27,7 +27,7 @@ function Header({ type }) {
 
   return (
     <div>
-      <h1 data-testid="page-title">Header</h1>
+      <h1 data-testid="page-title">{ title }</h1>
       <Link to="/profile">
         <img src={ profileIcon } alt="profile-icon" data-testid="profile-top-btn" />
       </Link>
@@ -53,8 +53,14 @@ function Header({ type }) {
   );
 }
 
+Header.defaultProps = {
+  type: '',
+  title: '',
+};
+
 Header.propTypes = {
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
+  title: PropTypes.string,
 };
 
 export default Header;

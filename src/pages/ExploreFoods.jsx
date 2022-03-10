@@ -15,8 +15,7 @@ function ExploreFoods() {
 
   return (
     <div>
-      <Header />
-      <h1 data-testid="page-title">Explore Foods</h1>
+      <Header title="Explore Foods" />
       <Link
         to="/explore/foods/ingredients"
         data-testid="explore-by-ingredient"

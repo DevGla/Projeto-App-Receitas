@@ -5,11 +5,14 @@ import RecipesCard from '../components/RecipesCard';
 import RecipesContext from '../context/RecipesContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { fetchFilterByCategories, fetchRecipe, fetchRecipeCategories } from '../services';
+import {
+  fetchFilterByCategories, fetchRecipe, fetchRecipeByIngredient,
+  fetchRecipeCategories,
+} from '../services';
 import ButtonCategory from '../components/ButtonCategory';
 
 function Foods() {
-  const { results, setResults } = useContext(RecipesContext);
+  const { results, setResults, filterByIngredient } = useContext(RecipesContext);
   const [categories, setCategories] = useState([]);
   const ELEVEN = 11;
   const MAX_CATEGORIES = 5;
@@ -24,9 +27,17 @@ function Foods() {
   }, []);
 
   useEffect(() => {
-    fetchRecipe('meal')
-      .then((recipes) => setResults(recipes));
-  }, [setResults]);
+    if (filterByIngredient.length !== 0) {
+      fetchRecipeByIngredient('meal', filterByIngredient)
+        .then((recipes) => {
+          setResults(recipes);
+        })
+        .catch((error) => console.log(error));
+    } else {
+      fetchRecipe('meal')
+        .then((recipes) => setResults(recipes));
+    }
+  }, [setResults, filterByIngredient]);
 
   const filterByCategory = (category) => {
     if (category === 'All') {
@@ -56,8 +67,7 @@ function Foods() {
 
   return (
     <Container>
-      <h1 data-testid="page-title">Foods</h1>
-      <Header type="meal" />
+      <Header type="meal" title="Foods" />
       <Row>
         {categories.length > 0 && categories.map((category) => (
           <Col xs="4" as="section" key={ category.strCategory }>
