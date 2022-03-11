@@ -1,0 +1,15 @@
+.recipes-card {
+  border-radius: 20px;
+  border: 1px solid rgba(51, 51, 51, 0.315);
+  /* margin: 10px; */
+}
+
+.recipes-card__title {
+  font-size: 1.5rem;
+  color: #333;
+  font-weight: bolder;
+}
+
+.recipes-card__image {
+  width: 100%;
+}

@@ -66,9 +66,9 @@ function Foods() {
   }
 
   return (
-    <Container>
+    <Container fluid className="pb-5">
       <Header type="meal" title="Foods" />
-      <Row>
+      <Row className="mt-5 py-4">
         {categories.length > 0 && categories.map((category) => (
           <Col xs="4" as="section" key={ category.strCategory }>
             <ButtonCategory
