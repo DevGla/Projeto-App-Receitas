@@ -1,0 +1,27 @@
+.login__page {
+  background-image: linear-gradient(
+    rgb(245, 119, 46), rgb(245, 164, 97)
+  );
+}
+
+.input__border {
+  border: 1px solid rgb(240, 180, 51);
+}
+
+.login__logo {
+  margin-left: 5rem;
+}
+
+.login__title {
+  font-weight: bolder;
+  font-size: 2rem;
+  margin-left: 4.3rem;
+}
+
+.login__button {
+  background-color: white;
+}
+
+.login__button:disabled {
+  background-color: white;
+}
