@@ -69,3 +69,17 @@ export const fetchIngredients = (type) => (
     .then((ingredients) => ingredients)
     .catch((error) => error)
 );
+
+export const fetchNationalities = (type) => (
+  fetch(`https://www.the${type}db.com/api/json/v1/1/list.php?a=list`)
+    .then((response) => response.json())
+    .then((nationalities) => nationalities)
+    .catch((error) => error)
+);
+
+export const fetchRecipeByNationality = (type, nationality) => (
+  fetch(`https://www.the${type}db.com/api/json/v1/1/filter.php?a=${nationality}`)
+    .then((response) => response.json())
+    .then((recipes) => recipes)
+    .catch((error) => error)
+);
