@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import copy from 'clipboard-copy';
 import { useHistory } from 'react-router';
+import { Col, Row } from 'react-bootstrap';
 import Header from '../components/Header';
 import shareIcon from '../images/shareIcon.svg';
 
@@ -10,7 +11,7 @@ function DoneRecipes() {
   const [copied, setCopied] = useState(false);
   const [filterState, setFilterState] = useState([]);
   useEffect(() => {
-    const local = JSON.parse(localStorage.getItem('doneRecipes'));
+    const local = JSON.parse(localStorage.getItem('doneRecipes')) || [];
     setState(local);
     setFilterState(local);
   }, []);
@@ -39,27 +40,35 @@ function DoneRecipes() {
   return (
     <div>
       <Header title="Done Recipes" />
-      <button
-        type="button"
-        data-testid="filter-by-all-btn"
-        onClick={ () => filterByType('all') }
-      >
-        All
-      </button>
-      <button
-        type="button"
-        data-testid="filter-by-food-btn"
-        onClick={ () => filterByType('food') }
-      >
-        Food
-      </button>
-      <button
-        type="button"
-        data-testid="filter-by-drink-btn"
-        onClick={ () => filterByType('drink') }
-      >
-        Drinks
-      </button>
+      <Row style={ { marginTop: '125px' } }>
+        <Col>
+          <button
+            type="button"
+            data-testid="filter-by-all-btn"
+            onClick={ () => filterByType('all') }
+          >
+            All
+          </button>
+        </Col>
+        <Col>
+          <button
+            type="button"
+            data-testid="filter-by-food-btn"
+            onClick={ () => filterByType('food') }
+          >
+            Food
+          </button>
+        </Col>
+        <Col>
+          <button
+            type="button"
+            data-testid="filter-by-drink-btn"
+            onClick={ () => filterByType('drink') }
+          >
+            Drinks
+          </button>
+        </Col>
+      </Row>
       {filterState.map((recipe, index) => (
         <div key={ index }>
           <div
