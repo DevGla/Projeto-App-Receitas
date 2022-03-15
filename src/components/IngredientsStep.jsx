@@ -2,15 +2,24 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 function IngredientsStep({ recipe, type, id, set }) {
-  const [used, setUsed] = useState([]);
   const ingredients = Object.entries(recipe)
     .filter((e) => e[0].includes('strIngredient') && e[1]);
   const measures = Object.entries(recipe)
     .filter((e) => e[0].includes('strMeasure') && e[1]);
 
+  let test = [];
+  let local = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  if (local && ingredients.length !== 0 && type === 'meals') {
+    test = local.meals[id];
+    if (local.meals[id].length === ingredients.length) set(false);
+  } else if (local && ingredients.length !== 0 && type === 'drinks') {
+    test = local.cocktails[id];
+    if (local.cocktails[id].length === ingredients.length) set(false);
+  }
+  const [used, setUsed] = useState(test);
+
   const handleClick = ({ target }) => {
-    let local = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    console.log(local);
+    local = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (!local) local = { cocktails: {}, meals: {} };
     if (type === 'meals') {
       let array = local.meals[id];
@@ -19,7 +28,6 @@ function IngredientsStep({ recipe, type, id, set }) {
       if (!check) {
         const newArray = [...array, target.id];
         local.meals[id] = newArray;
-        console.log(local);
         localStorage.setItem('inProgressRecipes', JSON.stringify(local));
       }
     } else if (type === 'drinks') {
@@ -29,7 +37,6 @@ function IngredientsStep({ recipe, type, id, set }) {
       if (!check) {
         const newArray = [...array, target.id];
         local.cocktails[id] = newArray;
-        console.log(local);
         localStorage.setItem('inProgressRecipes', JSON.stringify(local));
       }
     }
@@ -38,15 +45,15 @@ function IngredientsStep({ recipe, type, id, set }) {
   };
 
   useEffect(() => {
-    const local = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (local && type === 'meals') {
+    local = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (local && ingredients.length !== 0 && type === 'meals') {
       setUsed(local.meals[id]);
-      if (used.length === ingredients.length) set(false);
-    } else if (local && type === 'drinks') {
+      if (local.meals[id].length === ingredients.length) set(false);
+    } else if (local && ingredients.length !== 0 && type === 'drinks') {
       setUsed(local.cocktails[id]);
-      if (used.length === ingredients.length) set(false);
+      if (local.cocktails[id].length === ingredients.length) set(false);
     }
-  }, []);
+  }, [recipe]);
 
   return (
     <div>
@@ -58,7 +65,9 @@ function IngredientsStep({ recipe, type, id, set }) {
             onClick={ handleClick }
             checked={ used.some((el) => Number(el) === index) }
           />
-          <label htmlFor={ index }>{`${e[1]} - ${measures[index][1]}`}</label>
+          {measures[index]
+            ? <label htmlFor={ index }>{`${e[1]} - ${measures[index][1]}`}</label>
+            : <label htmlFor={ index }>{`${e[1]}`}</label>}
         </div>
       ))}
     </div>

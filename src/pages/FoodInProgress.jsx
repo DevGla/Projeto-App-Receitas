@@ -45,6 +45,29 @@ function FoodInProgress() {
   };
 
   const handleClick = () => {
+    let local = JSON.parse(localStorage.getItem('doneRecipes'));
+    let tags = [];
+    if (recipe.strTags) {
+      tags = recipe.strTags.split(', ');
+    }
+    let today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const yyyy = today.getFullYear();
+    today = `${dd}/${mm}/${yyyy}`;
+    const obj = {
+      id: recipe.idMeal,
+      type: 'food',
+      nationality: recipe.strArea,
+      category: recipe.strCategory,
+      alcoholicOrNot: '',
+      name: recipe.strMeal,
+      image: recipe.strMealThumb,
+      doneDate: today,
+      tags,
+    };
+    if (!local) local = [];
+    localStorage.setItem('doneRecipes', JSON.stringify([...local, obj]));
     history.push('/done-recipes');
   };
 

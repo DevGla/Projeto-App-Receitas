@@ -45,6 +45,29 @@ function DrinkInProgress() {
   };
 
   const handleClick = () => {
+    let local = JSON.parse(localStorage.getItem('doneRecipes'));
+    let tags = [];
+    if (recipe.strTags) {
+      tags = recipe.strTags.split(', ');
+    }
+    let today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const yyyy = today.getFullYear();
+    today = `${dd}/${mm}/${yyyy}`;
+    const obj = {
+      id: recipe.idDrink,
+      type: 'drink',
+      nationality: '',
+      category: recipe.strCategory,
+      alcoholicOrNot: recipe.strAlcoholic,
+      name: recipe.strDrink,
+      image: recipe.strDrinkThumb,
+      doneDate: today,
+      tags,
+    };
+    if (!local) local = [];
+    localStorage.setItem('doneRecipes', JSON.stringify([...local, obj]));
     history.push('/done-recipes');
   };
 
