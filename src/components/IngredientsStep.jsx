@@ -6,20 +6,10 @@ function IngredientsStep({ recipe, type, id, set }) {
     .filter((e) => e[0].includes('strIngredient') && e[1]);
   const measures = Object.entries(recipe)
     .filter((e) => e[0].includes('strMeasure') && e[1]);
-
-  let test = [];
-  let local = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  if (local && ingredients.length !== 0 && type === 'meals') {
-    test = local.meals[id];
-    if (local.meals[id].length === ingredients.length) set(false);
-  } else if (local && ingredients.length !== 0 && type === 'drinks') {
-    test = local.cocktails[id];
-    if (local.cocktails[id].length === ingredients.length) set(false);
-  }
-  const [used, setUsed] = useState(test);
+  const [used, setUsed] = useState([]);
 
   const handleClick = ({ target }) => {
-    local = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    let local = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (!local) local = { cocktails: {}, meals: {} };
     if (type === 'meals') {
       let array = local.meals[id];
@@ -29,6 +19,7 @@ function IngredientsStep({ recipe, type, id, set }) {
         const newArray = [...array, target.id];
         local.meals[id] = newArray;
         localStorage.setItem('inProgressRecipes', JSON.stringify(local));
+        setUsed([...used, target.id]);
       }
     } else if (type === 'drinks') {
       let array = local.cocktails[id];
@@ -38,14 +29,13 @@ function IngredientsStep({ recipe, type, id, set }) {
         const newArray = [...array, target.id];
         local.cocktails[id] = newArray;
         localStorage.setItem('inProgressRecipes', JSON.stringify(local));
+        setUsed([...used, target.id]);
       }
     }
-    setUsed([...used, target.id]);
-    if (used.length >= ingredients.length - 1) set(false);
   };
 
   useEffect(() => {
-    local = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const local = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (local && ingredients.length !== 0 && type === 'meals') {
       setUsed(local.meals[id]);
       if (local.meals[id].length === ingredients.length) set(false);
@@ -55,6 +45,16 @@ function IngredientsStep({ recipe, type, id, set }) {
     }
   }, [recipe]);
 
+  useEffect(() => {
+    used.forEach((e) => {
+      const step = document.getElementById(e);
+      step.setAttribute('checked', 'checked');
+    });
+    if (ingredients.length !== 0 && used.length >= ingredients.length) {
+      set(false);
+    }
+  }, [used]);
+
   return (
     <div>
       {ingredients.map((e, index) => (
@@ -63,7 +63,6 @@ function IngredientsStep({ recipe, type, id, set }) {
             type="checkbox"
             id={ index }
             onClick={ handleClick }
-            checked={ used.some((el) => Number(el) === index) }
           />
           {measures[index]
             ? <label htmlFor={ index }>{`${e[1]} - ${measures[index][1]}`}</label>
