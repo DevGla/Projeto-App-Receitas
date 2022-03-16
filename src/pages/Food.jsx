@@ -7,7 +7,8 @@ import RecomendationCard from '../components/RecomendationCard';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import { fetchingId, fetchingRecomendation } from '../services';
+import { fetchingId, fetchingRecomendation,
+  checkDone, checkInProgress, checkFavorite } from '../services';
 
 function Food() {
   const { id } = useParams();
@@ -22,31 +23,11 @@ function Food() {
   const AFTER_BAR_DOTCOM = 24;
   const AFTER_WACTH = 32;
 
-  const checkDone = () => {
-    const local = JSON.parse(localStorage.getItem('doneRecipes'));
-    if (local) {
-      const check = local.some((e) => e.id === id);
-      setDone(check);
-    }
-  };
-
-  const checkInProgress = () => {
-    const local = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (local) {
-      const check = Object.keys(local.meals).some((e) => e === id);
-      setInProgres(check);
-    }
-  };
-
-  const checkFavorite = () => {
-    const local = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (local) {
-      const check = local.some((e) => e.id === id);
-      setFavorite(check);
-    }
-  };
-
   const handleClick = () => {
+    let local = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (!local) local = { cocktails: {}, meals: { [id]: [] } };
+    else if (!local.meals[id]) local.meals[id] = [];
+    localStorage.setItem('inProgressRecipes', JSON.stringify(local));
     history.push(`/foods/${id}/in-progress`);
   };
 
@@ -74,9 +55,9 @@ function Food() {
   useEffect(() => {
     fetchingId(id, setRecipe);
     fetchingRecomendation(setRecomendation);
-    checkDone();
-    checkInProgress();
-    checkFavorite();
+    checkDone(id, setDone);
+    checkInProgress(id, setInProgres);
+    checkFavorite(id, setFavorite);
   }, []);
 
   return (

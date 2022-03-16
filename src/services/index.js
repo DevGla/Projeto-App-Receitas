@@ -83,3 +83,35 @@ export const fetchRecipeByNationality = (type, nationality) => (
     .then((recipes) => recipes)
     .catch((error) => error)
 );
+
+export const checkDone = (id, setDone) => {
+  const local = JSON.parse(localStorage.getItem('doneRecipes'));
+  if (local) {
+    const check = local.some((e) => e.id === id);
+    setDone(check);
+  }
+};
+
+export const checkInProgress = (id, setInProgres) => {
+  const local = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  if (local) {
+    const check = Object.keys(local.meals).some((e) => e === id);
+    setInProgres(check);
+  }
+};
+
+export const checkFavorite = (id, setFavorite) => {
+  const local = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  if (local) {
+    const check = local.some((e) => e.id === id);
+    setFavorite(check);
+  }
+};
+
+export const checkInProgressDrink = (id, setInProgres) => {
+  const local = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  if (local) {
+    const check = Object.keys(local.cocktails).some((e) => e === id);
+    setInProgres(check);
+  }
+};
