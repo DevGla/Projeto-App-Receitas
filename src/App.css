@@ -12,6 +12,18 @@ a, a:hover {
   padding: 0 ! important;
 }
 
+.btn-start-recipe {
+  background-color: rgb(88, 199, 24) !important;
+  font-weight: bold !important;
+  color: whitesmoke !important;
+  font-size: 1.25rem !important;
+  text-shadow: 0 0 2px rgb(0, 0, 0) !important;
+}
+
+.btn-done-recipe {
+  
+}
+
 .button__category {
   background-color: transparent;
   border: 2px solid rgb(245, 164, 97) ! important;

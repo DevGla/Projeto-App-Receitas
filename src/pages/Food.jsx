@@ -19,6 +19,8 @@ function Food() {
   const [favorite, setFavorite] = useState(false);
   const [copied, setCopied] = useState(false);
   const FIVE = 5;
+  const AFTER_BAR_DOTCOM = 24;
+  const AFTER_WACTH = 32;
 
   const checkDone = () => {
     const local = JSON.parse(localStorage.getItem('doneRecipes'));
@@ -78,27 +80,46 @@ function Food() {
   }, []);
 
   return (
-    <div>
-      <img data-testid="recipe-photo" src={ recipe.strMealThumb } alt="" />
-      <h1 data-testid="recipe-title">{ recipe.strMeal }</h1>
-      <div role="button" tabIndex="0" onKeyDown={ () => {} } onClick={ handleShare }>
-        <img src={ shareIcon } alt="" data-testid="share-btn" />
+    <div className="pb-5">
+      <img
+        data-testid="recipe-photo"
+        src={ recipe.strMealThumb }
+        alt=""
+        width="100%"
+      />
+      <div className="px-3">
+        <h1 data-testid="recipe-title">{ recipe.strMeal }</h1>
+        <p data-testid="recipe-category">{ recipe.strCategory }</p>
+        <div className="d-flex">
+          <div role="button" tabIndex="0" onKeyDown={ () => {} } onClick={ handleShare }>
+            <img src={ shareIcon } alt="" data-testid="share-btn" />
+          </div>
+          {copied && (<span>Link copied!</span>)}
+          <div
+            role="button"
+            tabIndex="0"
+            onKeyDown={ () => {} }
+            onClick={ handleFavorite }
+          >
+            <img
+              src={ favorite ? blackHeartIcon : whiteHeartIcon }
+              alt=""
+              data-testid="favorite-btn"
+            />
+          </div>
+        </div>
+        <IngredientsList recipe={ recipe } />
+        <p data-testid="instructions">{recipe.strInstructions}</p>
+
       </div>
-      {copied && (<span>Link copied!</span>)}
-      <div role="button" tabIndex="0" onKeyDown={ () => {} } onClick={ handleFavorite }>
-        <img
-          src={ favorite ? blackHeartIcon : whiteHeartIcon }
-          alt=""
-          data-testid="favorite-btn"
-        />
-      </div>
-      <p data-testid="recipe-category">{ recipe.strCategory }</p>
-      <IngredientsList recipe={ recipe } />
-      <p data-testid="instructions">{recipe.strInstructions}</p>
       <iframe
-        width="420"
+        width="100%"
         height="315"
-        src={ recipe.strYoutube }
+        src={ recipe.strYoutube && (
+          `${recipe.strYoutube
+            .slice(0, AFTER_BAR_DOTCOM)}embed/${recipe.strYoutube
+            .slice(AFTER_WACTH)}`
+        ) }
         title={ recipe.strMeal }
         data-testid="video"
       />
@@ -120,7 +141,7 @@ function Food() {
         <button
           type="button"
           data-testid="start-recipe-btn"
-          className="startBtn"
+          className="startBtn w-100 btn btn-start-recipe"
           onClick={ handleClick }
         >
           {inProgress ? 'Continue Recipe' : 'Start Recipe'}

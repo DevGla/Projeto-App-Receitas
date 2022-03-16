@@ -70,7 +70,7 @@ function Foods() {
       <Header type="meal" title="Foods" />
       <Row className="mt-5 py-4">
         {categories.length > 0 && categories.map((category) => (
-          <Col xs="4" as="section" key={ category.strCategory }>
+          <Col xs="6" as="section" key={ category.strCategory }>
             <ButtonCategory
               category={ category.strCategory }
               filterBy={ filterByCategory }

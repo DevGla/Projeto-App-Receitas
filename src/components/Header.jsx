@@ -29,17 +29,18 @@ function Header({ type, title }) {
 
   return (
     <Container fluid className="navbar__bg fixed-top">
-      <Row>
-        <Col className="d-flex justify-content-center align-items-center">
+      <Row className="py-2">
+        <Col xs="2" className="d-flex justify-content-center align-items-center">
           <Link to="/profile">
             <img src={ profileIcon } alt="profile-icon" data-testid="profile-top-btn" />
           </Link>
         </Col>
-        <Col className="d-flex justify-content-center align-items-center">
-          <h1 data-testid="page-title">{ title }</h1>
+        <Col xs="8" className="d-flex justify-content-center align-items-center">
+          <h1 className="header__title" data-testid="page-title">{ title }</h1>
         </Col>
         {visibleimage && (
           <Col
+            xs="2"
             className="d-flex justify-content-center align-items-center"
             role="button"
             tabIndex="0"

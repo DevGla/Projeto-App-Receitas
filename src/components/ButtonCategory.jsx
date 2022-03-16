@@ -15,7 +15,7 @@ function ButtonCategory({ category, filterBy }) {
     <button
       type="button"
       data-testid={ `${category}-category-filter` }
-      className="w-100 button__category"
+      className="w-100 button__category overflow-hidden"
       onClick={ handleActive }
     >
       {category}
