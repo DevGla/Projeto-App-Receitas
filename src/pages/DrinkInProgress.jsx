@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
+import { Col, Row } from 'react-bootstrap';
 import copy from 'clipboard-copy';
 import { fetchingDrinkId } from '../services';
 import IngredientsStep from '../components/IngredientsStep';
@@ -78,26 +79,59 @@ function DrinkInProgress() {
 
   return (
     <div>
-      <img data-testid="recipe-photo" src={ recipe.strDrinkThumb } alt="" />
-      <h1 data-testid="recipe-title">{ recipe.strDrink }</h1>
-      <div role="button" tabIndex="0" onKeyDown={ () => {} } onClick={ handleShare }>
-        <img src={ shareIcon } alt="" data-testid="share-btn" />
+      <img
+        className="w-100"
+        data-testid="recipe-photo"
+        src={ recipe.strDrinkThumb }
+        alt=""
+      />
+      <Row className="mt-2 mx-0">
+        <Col xs="8">
+          <h1 className="mb-0" data-testid="recipe-title">{ recipe.strDrink }</h1>
+          <p
+            data-testid="recipe-category"
+            className="mx-1"
+          >
+            { recipe.strAlcoholic }
+          </p>
+        </Col>
+        <Col xs="4" className="d-flex justify-content-around">
+          <div role="button" tabIndex="0" onKeyDown={ () => {} } onClick={ handleShare }>
+            <img src={ shareIcon } alt="" data-testid="share-btn" />
+          </div>
+          {copied && (<span>Link copied!</span>)}
+          <div
+            role="button"
+            tabIndex="0"
+            onKeyDown={ () => {} }
+            onClick={ handleFavorite }
+          >
+            <img
+              src={ favorite ? blackHeartIcon : whiteHeartIcon }
+              alt=""
+              data-testid="favorite-btn"
+            />
+          </div>
+        </Col>
+      </Row>
+      <div className="mx-3">
+        <h2>Ingredients</h2>
+        <div className="bg__recipe-details">
+          <IngredientsStep
+            recipe={ recipe }
+            type="drinks"
+            id={ id }
+            set={ setIsDisabled }
+          />
+        </div>
+        <h2>Instructions</h2>
+        <p data-testid="instructions">{recipe.strInstructions}</p>
       </div>
-      {copied && (<span>Link copied!</span>)}
-      <div role="button" tabIndex="0" onKeyDown={ () => {} } onClick={ handleFavorite }>
-        <img
-          src={ favorite ? blackHeartIcon : whiteHeartIcon }
-          alt=""
-          data-testid="favorite-btn"
-        />
-      </div>
-      <p data-testid="recipe-category">{ recipe.strAlcoholic }</p>
-      <IngredientsStep recipe={ recipe } type="drinks" id={ id } set={ setIsDisabled } />
-      <p data-testid="instructions">{recipe.strInstructions}</p>
       <button
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ isDisabled }
+        className="w-100 btn btn-start-recipe"
         onClick={ handleClick }
       >
         Finish Recipe

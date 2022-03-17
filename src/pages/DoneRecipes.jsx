@@ -37,7 +37,7 @@ function DoneRecipes() {
   };
 
   return (
-    <div className="mx-4">
+    <div className="mx-4 pb-5">
       <Header title="Done Recipes" />
       <Row style={ { marginTop: '75px' } }>
         <Col>

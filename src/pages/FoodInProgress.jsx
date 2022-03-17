@@ -87,8 +87,8 @@ function FoodInProgress() {
       />
       <Row className="mt-2 mx-0">
         <Col xs="8">
-          <h1 className="mb-0 mx-3" data-testid="recipe-title">{ recipe.strMeal }</h1>
-          <p className="mx-3" data-testid="recipe-category">{ recipe.strCategory }</p>
+          <h1 className="mb-0" data-testid="recipe-title">{ recipe.strMeal }</h1>
+          <p className="mx-1" data-testid="recipe-category">{ recipe.strCategory }</p>
         </Col>
         <Col xs="4" className="d-flex justify-content-around">
           <div role="button" tabIndex="0" onKeyDown={ () => {} } onClick={ handleShare }>

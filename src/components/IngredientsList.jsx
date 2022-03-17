@@ -15,7 +15,7 @@ function IngredientsList({ recipe = [] }) {
   }
 
   return (
-    <div>
+    <div className="bg__recipe-details">
       {ingredients.length > 0 && (
         ingredients.map((e, index) => (
           <p
