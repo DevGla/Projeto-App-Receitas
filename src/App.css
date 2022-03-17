@@ -2,14 +2,13 @@ body {
   height: 100vh;
 }
 
-a, a:hover {
+body a, body a:hover {
   color: #333;
-  text-decoration: none ! important;
+  text-decoration: none;
 }
 
-.done__card {
-  margin: 15px 0px !important;  
-  /* mt-2 mb-4 */
+body .done__card {
+  margin: 15px 1px;
 }
 
 .recipe__image {
@@ -26,54 +25,50 @@ a, a:hover {
 }
 
 .recipe__tag {
-  width: min-content;
   margin-bottom: 5px;
+  width: min-content;
 }
 
 .btn__share {
-  top: 0.5rem;
   right: 0.5rem;
+  top: 0.5rem;
 }
 
 .bg__color-theme {
   background-color: rgb(245, 164, 97);
 }
 
-.bg__recipe-details :nth-child(odd){
+.bg__recipe-details :nth-child( odd ) {
   background-color: rgb(241, 238, 236);
 }
 
-.ingredient__checked {
-  text-decoration: line-through !important;
+body .ingredient__checked {
+  text-decoration: line-through;
 }
 
-.navbar__bg {
+body .navbar__bg {
   background-color: rgb(245, 164, 97);
-  padding: 0 ! important;
+  padding: 0;
 }
 
-.btn__logout {
-  background-color: rgb(236, 97, 97) !important;
-  color: white !important;
-  font-weight: bolder !important;
+body .btn__logout {
+  background-color: rgb(236, 97, 97);
+  color: white;
+  font-weight: 900;
 }
 
-.btn-start-recipe {
-  background-color: rgb(88, 199, 24) !important;
-  font-weight: bold !important;
-  color: whitesmoke !important;
-  font-size: 1.25rem !important;
-  text-shadow: 0 0 2px rgb(0, 0, 0) !important;
+body .btn-start-recipe {
+  background-color: rgb(88, 199, 24);
+  color: whitesmoke;
+  font-size: 1.25rem;
+  font-weight: 900;
+  text-shadow: 0 0 2px black;
 }
 
-/* .btn-done-recipe {
-  
-} */
-
-.button__category {
+body .button__category {
   background-color: transparent;
-  border: 2px solid rgb(245, 164, 97) ! important;
-  color: rgb(245, 164, 97) ! important;
-  font-weight: bolder;
+  border: 2px solid rgb(245, 164, 97);
+  color: rgb(245, 164, 97);
+  font-weight: 900;
   margin: 5px 0;
 }

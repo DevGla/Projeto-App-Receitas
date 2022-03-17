@@ -1,7 +1,5 @@
 .login__page {
-  background-image: linear-gradient(
-    rgb(245, 119, 46), rgb(245, 164, 97)
-  );
+  background-image: linear-gradient(rgb(245, 119, 46), rgb(245, 164, 97));
 }
 
 .input__border {
@@ -13,8 +11,8 @@
 }
 
 .login__title {
-  font-weight: bolder;
   font-size: 2rem;
+  font-weight: 900;
   margin-left: 4.3rem;
 }
 

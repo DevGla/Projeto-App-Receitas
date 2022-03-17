@@ -74,7 +74,7 @@ function DoneRecipes() {
       {filterState.map((recipe, index) => (
         <Row
           key={ index }
-          className="done__card position-relative shadow bg-body rounded"
+          className="position-relative done__card shadow bg-body rounded"
         >
           <DoneCard
             index={ index }
