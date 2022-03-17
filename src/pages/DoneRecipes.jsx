@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import copy from 'clipboard-copy';
-import { useHistory } from 'react-router';
 import { Col, Row } from 'react-bootstrap';
 import Header from '../components/Header';
 import shareIcon from '../images/shareIcon.svg';
+import DoneCard from '../components/DoneCard';
 
 function DoneRecipes() {
-  const history = useHistory();
   const [state, setState] = useState([]);
   const [copied, setCopied] = useState(false);
   const [filterState, setFilterState] = useState([]);
@@ -38,12 +37,13 @@ function DoneRecipes() {
   };
 
   return (
-    <div>
+    <div className="mx-4">
       <Header title="Done Recipes" />
-      <Row style={ { marginTop: '125px' } }>
+      <Row style={ { marginTop: '75px' } }>
         <Col>
           <button
             type="button"
+            className="w-100 button__category overflow-hidden"
             data-testid="filter-by-all-btn"
             onClick={ () => filterByType('all') }
           >
@@ -53,6 +53,7 @@ function DoneRecipes() {
         <Col>
           <button
             type="button"
+            className="w-100 button__category overflow-hidden"
             data-testid="filter-by-food-btn"
             onClick={ () => filterByType('food') }
           >
@@ -62,6 +63,7 @@ function DoneRecipes() {
         <Col>
           <button
             type="button"
+            className="w-100 button__category overflow-hidden"
             data-testid="filter-by-drink-btn"
             onClick={ () => filterByType('drink') }
           >
@@ -70,54 +72,18 @@ function DoneRecipes() {
         </Col>
       </Row>
       {filterState.map((recipe, index) => (
-        <div key={ index }>
-          <div
-            role="button"
-            tabIndex="0"
-            onKeyDown={ () => {} }
-            onClick={ () => history.push(`/${recipe.type}s/${recipe.id}`) }
-          >
-            <img
-              src={ recipe.image }
-              alt=""
-              width="100px"
-              data-testid={ `${index}-horizontal-image` }
-            />
-          </div>
-          <p data-testid={ `${index}-horizontal-top-text` }>
-            {recipe.type === 'food'
-              ? (`${recipe.nationality} - ${recipe.category}`) : (
-                recipe.alcoholicOrNot) }
-          </p>
-          <div
-            role="button"
-            tabIndex="0"
-            onKeyDown={ () => {} }
-            data-testid={ `${index}-horizontal-name` }
-            onClick={ () => history.push(`/${recipe.type}s/${recipe.id}`) }
-          >
-            {recipe.name}
-          </div>
-          <p data-testid={ `${index}-horizontal-done-date` }>{recipe.doneDate}</p>
-          <div
-            role="button"
-            tabIndex="0"
-            onKeyDown={ () => {} }
-            onClick={ () => handleShare(recipe.id, recipe.type) }
-          >
-            <img
-              src={ shareIcon }
-              alt=""
-              data-testid={ `${index}-horizontal-share-btn` }
-            />
-          </div>
-          {copied && (<span>Link copied!</span>)}
-          {recipe.tags.map((tag) => (
-            <p key={ tag } data-testid={ `${index}-${tag}-horizontal-tag` }>
-              {tag}
-            </p>
-          ))}
-        </div>
+        <Row
+          key={ index }
+          className="done__card position-relative shadow bg-body rounded"
+        >
+          <DoneCard
+            index={ index }
+            recipe={ recipe }
+            copied={ copied }
+            handleShare={ handleShare }
+            shareIcon={ shareIcon }
+          />
+        </Row>
       ))}
     </div>
   );

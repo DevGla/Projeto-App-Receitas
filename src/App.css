@@ -7,6 +7,38 @@ a, a:hover {
   text-decoration: none ! important;
 }
 
+.done__card {
+  margin: 15px 0px !important;  
+  /* mt-2 mb-4 */
+}
+
+.recipe__image {
+  object-fit: cover;
+}
+
+.recipe__category {
+  color: rgb(109, 103, 103);
+  max-width: 80%;
+}
+
+.recipe__name {
+  font-size: 1.4rem;
+}
+
+.recipe__tag {
+  width: min-content;
+  margin-bottom: 5px;
+}
+
+.btn__share {
+  top: 0.5rem;
+  right: 0.5rem;
+}
+
+.bg__color-theme {
+  background-color: rgb(245, 164, 97);
+}
+
 .navbar__bg {
   background-color: rgb(245, 164, 97);
   padding: 0 ! important;
