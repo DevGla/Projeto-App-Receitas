@@ -40,8 +40,12 @@ function FoodInProgress() {
       name: recipe.strMeal,
       image: recipe.strMealThumb,
     };
-    if (local) localStorage.setItem('favoriteRecipes', JSON.stringify([...local, obj]));
-    localStorage.setItem('favoriteRecipes', JSON.stringify([obj]));
+    if (local && local.some((e) => e.id === obj.id)) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify(local
+        .filter((e) => e.id !== obj.id)));
+    } else if (local) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([...local, obj]));
+    } else localStorage.setItem('favoriteRecipes', JSON.stringify([obj]));
   };
 
   const handleClick = () => {
