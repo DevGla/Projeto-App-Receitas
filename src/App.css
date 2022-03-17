@@ -12,6 +12,12 @@ a, a:hover {
   padding: 0 ! important;
 }
 
+.btn__logout {
+  background-color: rgb(236, 97, 97) !important;
+  color: white !important;
+  font-weight: bolder !important;
+}
+
 .btn-start-recipe {
   background-color: rgb(88, 199, 24) !important;
   font-weight: bold !important;
@@ -20,9 +26,9 @@ a, a:hover {
   text-shadow: 0 0 2px rgb(0, 0, 0) !important;
 }
 
-.btn-done-recipe {
+/* .btn-done-recipe {
   
-}
+} */
 
 .button__category {
   background-color: transparent;

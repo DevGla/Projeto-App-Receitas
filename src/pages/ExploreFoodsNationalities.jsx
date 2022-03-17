@@ -49,12 +49,13 @@ function ExploreFoodsNationalities() {
   };
 
   return (
-    <>
+    <div className="mt-5 pt-5 pb-5 mx-3">
       <Header title="Explore Nationalities" />
       <select
         aria-label="Default select example"
         data-testid="explore-by-nationality-dropdown"
         onChange={ filterByNationatity }
+        className="bg-white mb-3 shadow p-3 rounded"
       >
         {nationatilies.length > 0 && nationatilies.map((nationality) => (
           <option
@@ -90,7 +91,7 @@ function ExploreFoodsNationalities() {
         </div>
       ))}
       <Footer />
-    </>
+    </div>
   );
 }
 

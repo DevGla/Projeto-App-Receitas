@@ -55,9 +55,13 @@ function Header({ type, title }) {
 
           </Col>
         )}
-        {visibleInput && (
-          <SearchBar type={ type } />
-        )}
+      </Row>
+      <Row className="mx-auto">
+        <Col xs="12">
+          {visibleInput && (
+            <SearchBar type={ type } />
+          )}
+        </Col>
       </Row>
     </Container>
   );

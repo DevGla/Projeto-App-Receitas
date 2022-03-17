@@ -18,13 +18,13 @@ function ExploreFoodsIngredients() {
   }, []);
 
   return (
-    <>
+    <div className="mt-5 pt-5 pb-5">
       <Header title="Explore Ingredients" />
-      <Row>
+      <Row className="m-0">
         {
           ingredientsList && ingredientsList.length > 0 && (
             ingredientsList.map((ingredient, index) => (
-              <Col key={ ingredient.strIngredient }>
+              <Col xs="6" key={ ingredient.strIngredient }>
                 <IngredientImage type="meal" index={ index } ingredient={ ingredient } />
               </Col>
             ))
@@ -32,7 +32,7 @@ function ExploreFoodsIngredients() {
         }
       </Row>
       <Footer />
-    </>
+    </div>
   );
 }
 
