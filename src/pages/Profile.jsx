@@ -19,7 +19,10 @@ function Profile() {
         className="text-start text-break"
         style={ { fontSize: '2rem' } }
       >
-        {stateEmail.slice(EMAIL_POSITION, stateEmail.length - 2)}
+        {stateEmail
+        && stateEmail.length
+        && stateEmail.length > 0
+        && stateEmail.slice(EMAIL_POSITION, stateEmail.length - 2)}
       </p>
       <button
         type="button"

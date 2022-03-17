@@ -39,6 +39,14 @@ a, a:hover {
   background-color: rgb(245, 164, 97);
 }
 
+.bg__recipe-details :nth-child(odd){
+  background-color: rgb(241, 238, 236);
+}
+
+.ingredient__checked {
+  text-decoration: line-through !important;
+}
+
 .navbar__bg {
   background-color: rgb(245, 164, 97);
   padding: 0 ! important;
