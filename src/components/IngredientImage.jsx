@@ -22,16 +22,27 @@ function IngredientImage({ type, ingredient, index }) {
       role="button"
       tabIndex="0"
       onKeyDown={ () => { } }
+      className="card shadow mb-4 bg-body rounded"
+      style={ { height: '200px' } }
     >
-      <span data-testid={ `${index}-card-name` }>{ ingredientName }</span>
       <img
         data-testid={ `${index}-card-img` }
         src={ `https://www.the${type}db.com/images/ingredients/${ingredientName}-Small.png` }
-        width="100px"
-        height="100px"
+        width="100%"
         style={ { objectFit: 'cover', objectPosition: 'center' } }
         alt={ `foto do ingredient ${ingredient.strIngredient}` }
+        className="card-img-top"
       />
+      <div
+        className="card-body d-flex justify-content-center align-items-center"
+      >
+        <span
+          data-testid={ `${index}-card-name` }
+          className="card-text"
+        >
+          { ingredientName }
+        </span>
+      </div>
     </section>
   );
 }

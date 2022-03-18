@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import copy from 'clipboard-copy';
 import { Col, Row } from 'react-bootstrap';
 import Header from '../components/Header';
 import shareIcon from '../images/shareIcon.svg';
 import blackIcon from '../images/blackHeartIcon.svg';
+import FavoriteCard from '../components/FavoriteCard';
 
 function FavoriteRecipes() {
   const [copied, setCopied] = useState(false);
@@ -24,9 +24,8 @@ function FavoriteRecipes() {
     setCopied(true);
   };
 
-  const handleFavorite = (id) => {
-    const arrayFavorites = filterState.filter((favorite) => favorite.id !== id.id);
-    console.log(arrayFavorites);
+  const handleFavorite = (recipe) => {
+    const arrayFavorites = filterState.filter((favorite) => favorite.id !== recipe.id);
     setFilterState(arrayFavorites);
   };
 
@@ -47,11 +46,12 @@ function FavoriteRecipes() {
   };
 
   return (
-    <div>
+    <div className="pb-5">
       <Header title="Favorite Recipes" />
-      <Row style={ { marginTop: '125px' } }>
+      <Row className="mx-2 mt-5 pt-4">
         <Col>
           <button
+            className="w-100 button__category overflow-hidden"
             type="button"
             data-testid="filter-by-all-btn"
             onClick={ () => filterByType('all') }
@@ -61,6 +61,7 @@ function FavoriteRecipes() {
         </Col>
         <Col>
           <button
+            className="w-100 button__category overflow-hidden"
             type="button"
             data-testid="filter-by-food-btn"
             onClick={ () => filterByType('food') }
@@ -70,6 +71,7 @@ function FavoriteRecipes() {
         </Col>
         <Col>
           <button
+            className="w-100 button__category overflow-hidden"
             type="button"
             data-testid="filter-by-drink-btn"
             onClick={ () => filterByType('drink') }
@@ -79,58 +81,20 @@ function FavoriteRecipes() {
         </Col>
       </Row>
       {filterState.map((recipe, index) => (
-        <div
+        <Row
           key={ `${recipe.id}-${index}` }
-          className="d-flex flex-column"
+          className="favorite__card shadow-lg bg-body rounded mx-3"
         >
-          <Link to={ `/${recipe.type === 'food' ? 'foods' : 'drinks'}/${recipe.id}` }>
-            <span
-              data-testid={ `${index}-horizontal-name` }
-            >
-              {recipe.name}
-            </span>
-            <img
-              src={ recipe.image }
-              alt={ recipe.name }
-              width="100x"
-              data-testid={ `${index}-horizontal-image` }
-            />
-          </Link>
-          <span
-            data-testid={ `${index}-horizontal-top-text` }
-          >
-            {recipe.type !== 'food' && recipe.alcoholicOrNot}
-            {recipe.type === 'food' && (
-              recipe.category ? `${recipe.nationality} - ${recipe.category}`
-                : recipe.nationality
-            )}
-          </span>
-          <div
-            role="button"
-            tabIndex="0"
-            onKeyDown={ () => {} }
-            onClick={ () => handleClick(recipe.id) }
-          >
-            <img
-              src={ shareIcon }
-              alt="Compartilhar"
-              data-testid={ `${index}-horizontal-share-btn` }
-            />
-          </div>
-          {copied && (<span>Link copied!</span>)}
-          <div
-            role="button"
-            tabIndex="0"
-            onKeyDown={ () => {} }
-            onClick={ () => handleFavorite(recipe) }
-          >
-            <img
-              src={ blackIcon }
-              alt="Favoritar"
-              data-testid={ `${index}-horizontal-favorite-btn` }
-            />
-          </div>
-        </div>
+          <FavoriteCard
+            index={ index }
+            recipe={ recipe }
+            copied={ copied }
+            handleClick={ handleClick }
+            handleFavorite={ handleFavorite }
+            shareIcon={ shareIcon }
+            blackIcon={ blackIcon }
+          />
+        </Row>
       ))}
     </div>
   );

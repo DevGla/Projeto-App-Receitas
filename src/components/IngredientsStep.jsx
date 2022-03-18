@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import IngredientStep from './IngredientStep';
 
 function IngredientsStep({ recipe, type, id, set }) {
   const ingredients = Object.entries(recipe)
@@ -49,6 +50,7 @@ function IngredientsStep({ recipe, type, id, set }) {
     used.forEach((e) => {
       const step = document.getElementById(e);
       step.setAttribute('checked', 'checked');
+      step.nextElementSibling.classList.add('ingredient__checked');
     });
     if (ingredients.length !== 0 && used.length >= ingredients.length) {
       set(false);
@@ -56,20 +58,18 @@ function IngredientsStep({ recipe, type, id, set }) {
   }, [used]);
 
   return (
-    <div>
+    <>
       {ingredients.map((e, index) => (
         <div key={ index } data-testid={ `${index}-ingredient-step` }>
-          <input
-            type="checkbox"
-            id={ index }
-            onClick={ handleClick }
+          <IngredientStep
+            index={ index }
+            handleClick={ handleClick }
+            e={ e }
+            measures={ measures }
           />
-          {measures[index]
-            ? <label htmlFor={ index }>{`${e[1]} - ${measures[index][1]}`}</label>
-            : <label htmlFor={ index }>{`${e[1]}`}</label>}
         </div>
       ))}
-    </div>
+    </>
   );
 }
 

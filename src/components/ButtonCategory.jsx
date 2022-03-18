@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'react-bootstrap';
 
 function ButtonCategory({ category, filterBy }) {
   const [active, setActive] = useState(false);
@@ -13,14 +12,14 @@ function ButtonCategory({ category, filterBy }) {
   };
 
   return (
-    <Button
+    <button
+      type="button"
       data-testid={ `${category}-category-filter` }
-      className="w-100"
-      variant="outline-primary"
+      className="w-100 button__category overflow-hidden"
       onClick={ handleActive }
     >
       {category}
-    </Button>
+    </button>
   );
 }
 

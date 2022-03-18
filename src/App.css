@@ -1,68 +1,88 @@
-.meals {
-  align-items: center;
-  background: #0fa36b;
-  color: #464646;
-  display: flex;
-  flex-direction: column;
-  font-family: sans-serif;
+body {
   height: 100vh;
-  justify-content: center;
-  width: 100%;
 }
 
-.rocksGlass {
-  animation: shake 1s infinite ease;
-  max-height: 80vh;
+body a, body a:hover {
+  color: #333;
+  text-decoration: none;
 }
 
-/*
-#iceLeft {
-  animation: clink .8s infinite ease;
-  opacity: 0.6;
-  transform-origin: 36px 66px;
+body .done__card {
+  margin: 15px 1px;
 }
 
-#iceRight {
-  animation: clink .8s .2s infinite ease;
-  opacity: 0.6;
-  transform-origin: 60px 78px;
+body .favorite__card {
+  margin: 15px 1px;
+  max-height: 164px;
 }
-*/
 
-.meals > .logo {
-  animation: shake 1.5s infinite ease;
-  color: aliceblue;
-  font-family: Montserrat , sans-serif;
-  font-size: 3em;
+.recipe__image {
+  object-fit: cover;
+}
+
+.recipe__category {
+  color: rgb(109, 103, 103);
+  max-width: 80%;
+}
+
+.recipe__group-button {
+  bottom: 0;
+  margin-bottom: 30px;
+}
+
+.recipe__name {
+  font-size: 1.4rem;
+}
+
+.recipe__name--big {
+  font-size: 1.4rem;
+}
+
+.recipe__tag {
+  margin-bottom: 5px;
+  width: min-content;
+}
+
+.btn__share {
+  right: 0.5rem;
+  top: 0.5rem;
+}
+
+.bg__color-theme {
+  background-color: rgb(245, 164, 97);
+}
+
+.bg__recipe-details :nth-child( odd ) {
+  background-color: rgb(241, 238, 236);
+}
+
+body .ingredient__checked {
+  text-decoration: line-through;
+}
+
+body .navbar__bg {
+  background-color: rgb(245, 164, 97);
+  padding: 0;
+}
+
+body .btn__logout {
+  background-color: rgb(236, 97, 97);
+  color: white;
   font-weight: 900;
 }
 
-@keyframes shake {
-
-  0% {
-    transform: rotate(5deg);
-  }
-
-  50% {
-    transform: rotate(-5deg);
-  }
-
-  100% {
-    transform: rotate(5deg);
-  }
+body .btn-start-recipe {
+  background-color: rgb(88, 199, 24);
+  color: whitesmoke;
+  font-size: 1.25rem;
+  font-weight: 900;
+  text-shadow: 0 0 2px black;
 }
 
-@keyframes clink {
-
-  0% {
-    transform: rotate(-10deg);
-  }
-
-  50% {
-    transform: rotate(20deg);
-  }
-
-  100% {
-    transform: rotate(-10deg);
-  }
+body .button__category {
+  background-color: transparent;
+  border: 2px solid rgb(245, 164, 97);
+  color: rgb(245, 164, 97);
+  font-weight: 900;
+  margin: 5px 0;
 }

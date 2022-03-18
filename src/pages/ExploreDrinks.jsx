@@ -3,6 +3,7 @@ import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import ExploreCard from '../components/ExploreCard';
 
 function ExploreDrinks() {
   const history = useHistory();
@@ -13,20 +14,27 @@ function ExploreDrinks() {
   };
 
   return (
-    <div>
+    <div className="mt-5 pt-5 px-3 mb-0">
       <Header title="Explore Drinks" />
       <Link
         to="/explore/drinks/ingredients"
         data-testid="explore-by-ingredient"
       >
-        By Ingredient
+        <ExploreCard
+          title="By Ingredient"
+          image="https://www.emporiomuseudagula.com.br/media/cache/07/40/074019677c6c0ef29f7a436eaaf2136d.jpg"
+        />
       </Link>
       <button
         type="button"
+        className="border-0 bg-transparent px-0"
         data-testid="explore-surprise"
         onClick={ requestAndRedirect }
       >
-        Surprise me!
+        <ExploreCard
+          title="Surprise me!"
+          image="https://imagensemoldes.com.br/wp-content/uploads/2020/07/Conjunto-Interroga%C3%A7%C3%A3o-PNG-1024x512.png"
+        />
       </button>
       <Footer />
     </div>
