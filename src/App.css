@@ -11,6 +11,11 @@ body .done__card {
   margin: 15px 1px;
 }
 
+body .favorite__card {
+  margin: 15px 1px;
+  max-height: 164px;
+}
+
 .recipe__image {
   object-fit: cover;
 }
@@ -20,7 +25,16 @@ body .done__card {
   max-width: 80%;
 }
 
+.recipe__group-button {
+  bottom: 0;
+  margin-bottom: 30px;
+}
+
 .recipe__name {
+  font-size: 1.4rem;
+}
+
+.recipe__name--big {
   font-size: 1.4rem;
 }
 
