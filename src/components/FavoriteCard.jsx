@@ -11,59 +11,61 @@ function FavoriteCard(props) {
   return (
     <>
       <Col xs="6" className="p-0">
-        <Link to={`/${recipe.type === 'food' ? 'foods' : 'drinks'}/${recipe.id}`}>
+        <Link to={ `/${recipe.type === 'food' ? 'foods' : 'drinks'}/${recipe.id}` }>
           <img
-            src={recipe.image}
-            alt={recipe.name}
+            src={ recipe.image }
+            alt={ recipe.name }
             width="100%"
-            data-testid={`${index}-horizontal-image`}
+            data-testid={ `${index}-horizontal-image` }
           />
         </Link>
       </Col>
       <Col xs="6" className="position-relative">
         <span
           className="d-block w-100 recipe__category mt-2"
-          data-testid={`${index}-horizontal-top-text`}
+          data-testid={ `${index}-horizontal-top-text` }
         >
-          {recipe.type !== 'food' && recipe.alcoholicOrNot}
-          {recipe.type === 'food' && (
-            recipe.category ? `${recipe.nationality} - ${recipe.category}`
-              : recipe.nationality
-          )}
+          { recipe.type !== 'food' && recipe.alcoholicOrNot }
+          {
+            recipe.type === 'food' && (
+              recipe.category ? `${recipe.nationality} - ${recipe.category}`
+                : recipe.nationality
+            )
+          }
         </span>
-        <Link to={`/${recipe.type === 'food' ? 'foods' : 'drinks'}/${recipe.id}`}>
+        <Link to={ `/${recipe.type === 'food' ? 'foods' : 'drinks'}/${recipe.id}` }>
           <span
             className="recipe__name--big w-100"
-            data-testid={`${index}-horizontal-name`}
+            data-testid={ `${index}-horizontal-name` }
           >
-            {recipe.name}
+            { recipe.name }
           </span>
         </Link>
         <div className="d-flex position-absolute recipe__group-button">
           <div
             role="button"
             tabIndex="0"
-            onKeyDown={() => { }}
-            onClick={() => handleClick(recipe.id)}
+            onKeyDown={ () => { } }
+            onClick={ () => handleClick(recipe.id) }
           >
             <img
-              src={shareIcon}
+              src={ shareIcon }
               alt="Compartilhar"
-              data-testid={`${index}-horizontal-share-btn`}
+              data-testid={ `${index}-horizontal-share-btn` }
             />
           </div>
-          {copied && (<span>Link copied!</span>)}
+          { copied && (<span>Link copied!</span>) }
           <div
             role="button"
             tabIndex="0"
             className="mx-4"
-            onKeyDown={() => { }}
-            onClick={() => handleFavorite(recipe)}
+            onKeyDown={ () => { } }
+            onClick={ () => handleFavorite(recipe) }
           >
             <img
-              src={blackIcon}
+              src={ blackIcon }
               alt="Favoritar"
-              data-testid={`${index}-horizontal-favorite-btn`}
+              data-testid={ `${index}-horizontal-favorite-btn` }
             />
           </div>
         </div>
