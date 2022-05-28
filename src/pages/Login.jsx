@@ -41,7 +41,13 @@ function Login(props) {
       <Col xs="12" className="align-self-end d-flex justify-content-center">
         <Row>
           <Col xs="12"><img className="login__logo" src={ logo } alt="logo" /></Col>
-          <Col xs="12"><span className="login__title">Recipe Project</span></Col>
+          <Col xs="12">
+            <span
+              className="login__title"
+            >
+              Receitas
+            </span>
+          </Col>
         </Row>
       </Col>
       <Col xs="12" className="align-self-start">
