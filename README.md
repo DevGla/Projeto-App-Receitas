@@ -226,7 +226,7 @@ https://www.figma.com/file/cBDVGdqQxUuVlQp3ehW7wx/Recipes-App
 1. Clone o repositório
   * `git clone git@github.com:DevGla/Projeto-App-Receitas.git`
   * Entre na pasta do repositório que você acabou de clonar:
-    * `cd sd-017-project-recipes-app`
+    * `cd Projeto-App-Receitas`
 
 2. Instale as dependências e inicialize o projeto
   * Instale as dependências:
